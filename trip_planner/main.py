@@ -17,6 +17,33 @@ class TripCrew:
     def run(self):
         agents = TripAgents()
         tasks = TripTasks()
+        agenterecetas = agents.buscador()
+        ingredientes_task = tasks.buscadorecetas(
+            agenterecetas,
+            self.origin,
+            self.cities,
+            self.interests,
+            self.date_range
+        )
+        agenteIngredientes = agents.cocinero()
+        listaIngredientes= tasks.sacaingredientes(
+            agenterecetas,
+            self.origin,
+            self.cities,
+            self.interests,
+            self.date_range
+        )
+        crew = Crew(
+            agents=[agenterecetas,agenteIngredientes],
+            tasks=[ingredientes_task,listaIngredientes],
+            verbose=True
+        )
+
+        return crew.kickoff()
+
+    def run3(self):
+        agents = TripAgents()
+        tasks = TripTasks()
         recommender_agent = agents.agenteRecomendador()
         recommend_task = tasks.recommend_task(
             recommender_agent,

@@ -55,7 +55,8 @@ class TripTasks:
                 the recipe given by the input.
             """),
             agent=agent,
-            expected_output="The recipe given by the input: {comida}"
+            expected_output="The recipe given by the input: {comida}",
+            output_file="receta.md"
         )
     def sacaingredientes(self, agent, receta):
         return Task(
