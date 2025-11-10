@@ -56,16 +56,19 @@ class TripTasks:
             """),
             agent=agent,
             expected_output="The recipe given by the input: {comida}",
-            output_file="receta.md"
+            output_file="receta.txt"
         )
-    def sacaingredientes(self, agent, receta):
+    
+    def sacaingredientes(self, agent):
+        #receta = open("receta.txt","r").read()
         return Task(
+            
             description=dedent(f"""
-                From a recipe input: {receta}
+                From the recipe: 
                 You will have to extract the ingredients from the recipe.
             """),
             agent=agent,
-            expected_output="The list of ingredients that are used in the recipe: {receta}"
+            expected_output="The list of ingredients that are used in the recipe: "
         
         )
 

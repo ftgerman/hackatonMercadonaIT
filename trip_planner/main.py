@@ -11,6 +11,7 @@ class TripCrew:
     def __init__(self, consulta, categoria):
         self.consulta = consulta
         self.categoria = categoria
+        self.receta = ""
 
     def run(self):
         agents = TripAgents()
@@ -33,19 +34,13 @@ class TripCrew:
                 buscadorecetas = tasks.buscadorecetas(
                     cocinero, consulta
                 )
-                sacaingredientes = tasks.sacaingredientes(buscador,buscadorecetas)
+                sacaingredientes = tasks.sacaingredientes(buscador)
                 crew = Crew(
                 agents = [cocinero, buscador],
                 tasks = [buscadorecetas, sacaingredientes],
                 verbose = True
                 )
                 return crew.kickoff()
-
-    def run3(self):
-        pass
-
-    def run2(self):
-        pass
 
 
 # Interfaz Streamlit

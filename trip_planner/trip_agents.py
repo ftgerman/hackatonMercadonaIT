@@ -4,6 +4,7 @@ from crewai import Agent, LLM
 from tools.browser_tools import BrowserTools
 from tools.calculator_tools import CalculatorTools
 from tools.search_tools import SearchTools
+from crewai_tools import FileReadTool
 
 
 import json
@@ -28,6 +29,7 @@ llm = LLM(
 search_internet = SearchTools.search_internet
 browse = BrowserTools.scrape_and_summarize_website
 calc = CalculatorTools.calculate
+readFile = FileReadTool()
 
 class TripAgents():
 
@@ -41,17 +43,6 @@ class TripAgents():
         llm=llm,
         verbose=True)
 
-  def cocinero(self):
-    return Agent(
-        role='Expert Cook',
-        goal='Provide the ingredients given a certain recipe',
-        backstory="""A very reknown cook""",
-        tools=[
-            search_internet,
-            browse    ],
-        llm=llm,
-        verbose=True)
-    
   def buscador(self):
     return Agent(
         role='Recipe Searcher',
@@ -61,7 +52,20 @@ class TripAgents():
             search_internet,
             browse    ],
         llm=llm,
+        verbose=True
+        )
+
+  def cocinero(self):
+    return Agent(
+        role='Expert Cook',
+        goal='Provide the ingredients given a certain recipe',
+        backstory="""A very reknown cook""",
+        tools=[
+            readFile
+        ],
+        llm=llm,
         verbose=True)
+    
 
   def travel_concierge(self):
     return Agent(
