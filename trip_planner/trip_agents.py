@@ -34,6 +34,15 @@ readFileReceta = FileReadTool("./receta.txt")
 
 class TripAgents():
 
+  def escritor(self):
+    return Agent(
+        role='Analista profesional de Mercadona',
+        goal='Resumir las quejas en datos numéricos',
+        backstory=
+        'Experto en ánalisis y procesamiento de datos',
+        llm=llm,
+        verbose=True)
+  
   def agenteRecomendador(self):
     return Agent(
         role='Mercadona product expert',

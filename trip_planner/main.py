@@ -4,6 +4,8 @@ from trip_agents import TripAgents
 from trip_tasks import TripTasks
 from dotenv import load_dotenv
 
+import json 
+
 load_dotenv()
 
 class TripCrew:
@@ -58,11 +60,27 @@ with st.form("mb_form"):
     btn_enviar = st.form_submit_button("Generar respuesta")
 
 if btn_enviar and categoria!="Seleccione categoría..." and consulta!="":
-    with st.spinner("🧠 Generando respuesta..."):
-        trip_crew = TripCrew(consulta, categoria)
-        result = trip_crew.run()
     if categoria == "Queja":
-        pass
-    st.success("✅ ¡Respuesta dada!")
-    st.markdown("Respuesta:")
-    #st.write(result.raw)
+        telefono ="+34 637601888" 
+        datos = {
+            "telefono" : telefono,
+            "queja" : consulta
+        }
+        with open("tools/bbdd/quejas.json", "r", encoding="utf-8") as bbdd:
+            quejas = json.load(bbdd)
+            try:
+                quejas[telefono].append(consulta)
+            except KeyError:
+                quejas[telefono] = []
+                quejas[telefono].append(consulta)
+        with open("tools/bbdd/quejas.json", "w", encoding="utf-8") as bbdd:
+            json.dump(quejas, bbdd, indent=4, ensure_ascii=False)
+        st.success("Gracias por el comentario")
+
+    else:
+        with st.spinner("🧠 Generando respuesta..."):
+            trip_crew = TripCrew(consulta, categoria)
+            result = trip_crew.run()
+        
+
+        st.write(result.raw)

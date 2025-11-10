@@ -5,6 +5,25 @@ from datetime import date
 
 class TripTasks:
 
+    def resumen_task(self, agent, datos):
+        
+        return Task(   
+            
+            description=dedent(f"""
+                Eres un analista de datos experto de Mercadona.Donde dads una lista de
+            feedbacks negativos:          
+                {datos}
+
+                Debes resumir los feedbacks y otorgar datos numéricos que aporten valor, como los porcentajes de cada categoría de queja.
+                Solo debes aportar datos numéricos y que sea breve.
+
+
+            """),
+            agent=agent,
+            expected_output="Lista de categoría de queja y su porcentaje"
+        )
+
+
     def recommend_task(self, agent):
         ticket = ""
         for f in os.listdir("../tickets/"):
@@ -38,8 +57,8 @@ class TripTasks:
                                
                 {self.__tip_section()}
 
-                
-                Client Tickets: {ticket}
+                The output is a list of 3 recommended products with justifications based on the tickets provided. 
+                Talk to the client in a friendly and professional manner. Explain him, in a brief way, why you have chosen those products.  
 
 
             """),
@@ -79,35 +98,7 @@ class TripTasks:
         
         )
 
-    def plan_task(self, agent, origin, interests, range):
-        return Task(
-            description=dedent(f"""
-                Expand this guide into a full 7-day travel 
-                itinerary with detailed per-day plans, including 
-                weather forecasts, places to eat, packing suggestions, 
-                and a budget breakdown.
-                
-                You MUST suggest actual places to visit, actual hotels 
-                to stay and actual restaurants to go to.
-                
-                This itinerary should cover all aspects of the trip, 
-                from arrival to departure, integrating the city guide
-                information with practical travel logistics.
-                
-                Your final answer MUST be a complete expanded travel plan,
-                formatted as markdown, encompassing a daily schedule,
-                anticipated weather conditions, recommended clothing and
-                items to pack, and a detailed budget, ensuring THE BEST
-                TRIP EVER. Be specific and give it a reason why you picked
-                each place, what makes them special! {self.__tip_section()}
 
-                Trip Date: {range}
-                Traveling from: {origin}
-                Traveler Interests: {interests}
-            """),
-            agent=agent,
-            expected_output="Complete expanded travel plan with daily schedule, weather conditions, packing suggestions, and budget breakdown"
-        )
 
     def __tip_section(self):
         return "If you do your BEST WORK, I'll tip you $100!"
