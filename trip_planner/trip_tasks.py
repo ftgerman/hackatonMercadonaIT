@@ -71,11 +71,11 @@ class TripTasks:
         return Task(
             
             description=dedent(f"""
-                From the recipe: 
+                From the recipe store in the file "receta.txt":
                 You will have to extract the ingredients from the recipe.
             """),
             agent=agent,
-            expected_output="The list of ingredients that are used in the recipe: "
+            expected_output="The list of ingredients that are used in the recipe and the amounts"
         
         )
 
