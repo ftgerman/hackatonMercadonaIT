@@ -52,22 +52,26 @@ class TripCrew:
 
 
 # Interfaz Streamlit
-st.set_page_config(page_title="Planificador de viajes", layout="centered")
-st.title("🌍 Planificador de viajes")
-st.markdown("Introduce los datos para generar tu plan de viaje personalizado con agentes inteligentes.")
+st.set_page_config(page_title="MercaBot", layout="centered")
+st.title("MercaBot")
+st.markdown("Introduzca categoría y consulta.")
 
-with st.form("trip_form"):
-    location = st.text_input("¿Desde dónde viajas?")
-    cities = st.text_input("¿Qué pais quieres visitar?")
-    date_range = st.text_input("¿Cuál es tu rango de fechas para el viaje?")
-    interests = st.text_area("¿Cuáles son tus intereses o aficiones?")
-    submitted = st.form_submit_button("Generar plan de viaje")
+with st.form("mb_form"):
+    
+    categorias = ["Seleccione categoría...","Recordatorio", "Productos para recetas", "Queja"]
+    categoria = st.selectbox(
+        "Categoría",
+        categorias,
+        index=0
+    )
+    consulta = st.text_input("Consulta")
+    btn_enviar = st.form_submit_button("Generar respuesta")
 
-if submitted:
-    with st.spinner("🧠 Planeando tu viaje con ayuda de agentes inteligentes..."):
-        trip_crew = TripCrew(location, cities, date_range, interests)
-        result = trip_crew.run()
+if btn_enviar and categoria!="Seleccione categoría..." and consulta!="":
+    #with st.spinner("🧠 Generando respuesta..."):
+        #trip_crew = TripCrew(location, cities, date_range, interests)
+        #result = trip_crew.run()
 
-    st.success("✅ ¡Plan de viaje generado!")
-    st.markdown("### ✈️ Tu Plan de Viaje")
-    st.write(result.raw)
+    st.success("✅ ¡Respuesta dada!")
+    st.markdown("Respuesta:")
+    #st.write(result.raw)
