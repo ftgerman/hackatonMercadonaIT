@@ -7,12 +7,11 @@ import json
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-import schedule
 import time
 import json
 from crewai import Crew
-from trip_agents import TripAgents
-from trip_tasks import TripTasks
+from agents import Agents
+from tasks import Tasks
 
 #load_dotenv()
 
@@ -21,8 +20,8 @@ class Quejas:
     def __init__(self, datos):
         self.datos = datos
     def run(self):
-            agents = TripAgents()
-            tasks = TripTasks()
+            agents = Agents()
+            tasks = Tasks()
             
             escritor = agents.escritor()
             escritor_task = tasks.resumen_task(

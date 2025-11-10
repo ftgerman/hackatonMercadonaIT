@@ -1,14 +1,14 @@
 import streamlit as st
 from crewai import Crew
-from trip_agents import TripAgents
-from trip_tasks import TripTasks
+from agents import Agents
+from tasks import Tasks
 from dotenv import load_dotenv
 
 import json 
 
 load_dotenv()
 
-class TripCrew:
+class mercaCrew:
 
     def __init__(self, consulta, categoria):
         self.consulta = consulta
@@ -16,8 +16,8 @@ class TripCrew:
         self.receta = ""
 
     def run(self):
-        agents = TripAgents()
-        tasks = TripTasks()
+        agents = Agents()
+        tasks = Tasks()
         match categoria:
             case "Recomendador":
                 recommender_agent = agents.agenteRecomendador()
@@ -79,7 +79,7 @@ if btn_enviar and ((categoria!="Seleccione categoría..." and consulta!="") or (
 
     else:
         with st.spinner("🧠 Generando respuesta..."):
-            trip_crew = TripCrew(consulta, categoria)
+            trip_crew = mercaCrew(consulta, categoria)
             result = trip_crew.run()
         
 

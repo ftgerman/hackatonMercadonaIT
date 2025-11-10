@@ -32,7 +32,7 @@ calc = CalculatorTools.calculate
 writeFileReceta = FileWriterTool()
 readFileReceta = FileReadTool("./receta.txt")
 
-class TripAgents():
+class   Agents():
 
   def escritor(self):
     return Agent(

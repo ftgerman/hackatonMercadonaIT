@@ -3,7 +3,7 @@ from crewai import Task
 from textwrap import dedent
 from datetime import date
 
-class TripTasks:
+class Tasks:
 
     def resumen_task(self, agent, datos):
         
