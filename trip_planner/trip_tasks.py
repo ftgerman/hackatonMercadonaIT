@@ -5,7 +5,7 @@ from datetime import date
 
 class TripTasks:
 
-    def recommend_task(self, agent, origin, cities, interests, range):
+    def recommend_task(self, agent):
         ticket = ""
         for f in os.listdir("../tickets/"):
             if f.endswith(".txt"):
