@@ -47,32 +47,25 @@ class TripTasks:
             expected_output="A list of 3 recommended products from Mercadona based on the client's tickets and preferences"
         )
 
-    def gather_task(self, agent, origin, interests, range):
+    def buscadorecetas(self, agent, comida):
         return Task(
             description=dedent(f"""
-                As a local expert on this city you must compile an 
-                in-depth guide for someone traveling there and wanting 
-                to have THE BEST trip ever!
-                Gather information about key attractions, local customs,
-                special events, and daily activity recommendations.
-                Find the best spots to go to, the kind of place only a
-                local would know.
-                This guide should provide a thorough overview of what 
-                the city has to offer, including hidden gems, cultural
-                hotspots, must-visit landmarks, weather forecasts, and
-                high level costs.
-                
-                The final answer must be a comprehensive city guide, 
-                rich in cultural insights and practical tips, 
-                tailored to enhance the travel experience.
-                {self.__tip_section()}
-
-                Trip Date: {range}
-                Traveling from: {origin}
-                Traveler Interests: {interests}
+                From a recipe input: {comida}
+                You will have to look through the internet in order to find 
+                the recipe given by the input.
             """),
             agent=agent,
-            expected_output="Comprehensive city guide including hidden gems, cultural hotspots, and practical travel tips"
+            expected_output="The recipe given by the input: {comida}"
+        )
+    def sacaingredientes(self, agent, receta):
+        return Task(
+            description=dedent(f"""
+                From a recipe input: {receta}
+                You will have to extract the ingredients from the recipe.
+            """),
+            agent=agent,
+            expected_output="The list of ingredients that are used in the recipe: {receta}"
+        
         )
 
     def plan_task(self, agent, origin, interests, range):

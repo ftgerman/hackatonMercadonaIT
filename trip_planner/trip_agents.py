@@ -41,12 +41,22 @@ class TripAgents():
         llm=llm,
         verbose=True)
 
-  def local_expert(self):
+  def cocinero(self):
     return Agent(
-        role='Local Expert at this city',
-        goal='Provide the BEST insights about the selected city',
-        backstory="""A knowledgeable local guide with extensive information
-        about the city, it's attractions and customs""",
+        role='Expert Cook',
+        goal='Provide the ingredients given a certain recipe',
+        backstory="""A very reknown cook""",
+        tools=[
+            search_internet,
+            browse    ],
+        llm=llm,
+        verbose=True)
+    
+  def buscador(self):
+    return Agent(
+        role='Recipe Searcher',
+        goal='Search for recipes based on input: {input}',
+        backstory="""An expert in the research capable of locating every single type of recipe""",
         tools=[
             search_internet,
             browse    ],
