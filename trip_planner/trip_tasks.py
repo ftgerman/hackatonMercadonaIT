@@ -1,32 +1,50 @@
+import os
 from crewai import Task
 from textwrap import dedent
 from datetime import date
 
 class TripTasks:
 
-    def identify_task(self, agent, origin, cities, interests, range):
-        return Task(
+    def recommend_task(self, agent, origin, cities, interests, range):
+        ticket = ""
+        for f in os.listdir("../tickets/"):
+            if f.endswith(".txt"):
+                with open(os.path.join("../tickets/", f), "r") as file:
+                    ticket += file.read() + "\n"
+        
+        return Task(   
+            
             description=dedent(f"""
-                Analyze and select the best city for the trip based 
-                on specific criteria such as weather patterns, seasonal
-                events, and travel costs. This task involves comparing
-                multiple cities, considering factors like current weather
-                conditions, upcoming cultural or seasonal events, and
-                overall travel expenses. 
-                
-                Your final answer must be a detailed
-                report on the chosen city, and everything you found out
-                about it, including the actual flight costs, weather 
-                forecast and attractions.
+                You are an expert personal shopper and data analyst for Mercadona. Your goal is to analyze the client's past purchase history (provided as 'Client Tickets') to identify their shopping patterns, preferences, and potential needs.
+
+                Based on your analysis, you must recommend **three specific products** from Mercadona that the client has *not* purchased before but would likely enjoy.
+
+                **Your instructions are:**
+                1.  **Analyze Purchase History:** Carefully scan all the 'Client Tickets'. Look for:
+                    * **Frequently Bought Items:** What do they buy every time? (e.g., 'Leche semidesnatada', 'Huevos').
+                    * **Product Categories:** Are they buying a lot from a specific category? (e.g., 'Fruta y Verdura', 'Sin Gluten', 'Cuidado Personal', 'Limpieza').
+                    * **Dietary Preferences:** Can you infer any dietary needs? (e.g., 'Bebida de Soja' or 'Tofu' might suggest vegetarian/vegan preferences).
+                    * **Missing Complements:** Do they buy items that have a common partner? (e.g., they buy 'Spaghetti' but never 'Tomate Frito'; they buy 'Shampoo' but never 'Conditioner').
+
+                2.  **Generate Recommendations:** Select **exactly three** new products. These should be logical recommendations based on the patterns you found. For example:
+                    * If they always buy 'Yogur Natural', recommend 'Yogur Griego'.
+                    * If they buy 'Sin Gluten', recommend a new 'Pasta Sin Gluten' or 'Pan de molde Sin Gluten'.
+                    * If they buy 'Guacamole', recommend 'Hummus'.
+
+                3.  **Provide Justification:** For each of the three recommendations, you MUST provide a one-sentence justification that links it to their purchase history.
+
+                It is imperative that your recommendations are **specific products available at Mercadona**. Avoid generic suggestions like 'buy more fruits' or 'try new snacks'. Instead, name actual products they can find in the store.                                
+                **The final result must be entirely in Spanish.**
+                               
                 {self.__tip_section()}
 
-                Traveling from: {origin}
-                City Options: {cities}
-                Trip Date: {range}
-                Traveler Interests: {interests}
+                
+                Client Tickets: {ticket}
+
+
             """),
             agent=agent,
-            expected_output="Detailed report on the chosen city including flight costs, weather forecast, and attractions"
+            expected_output="A list of 3 recommended products from Mercadona based on the client's tickets and preferences"
         )
 
     def gather_task(self, agent, origin, interests, range):

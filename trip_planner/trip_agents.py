@@ -31,12 +31,12 @@ calc = CalculatorTools.calculate
 
 class TripAgents():
 
-  def city_selection_agent(self):
+  def agenteRecomendador(self):
     return Agent(
-        role='City Selection Expert',
-        goal='Select the best city based on weather, season, and prices',
+        role='Mercadona product expert',
+        goal='Recommend Mercadona products based on client tickets and preferences',
         backstory=
-        'An expert in analyzing travel data to pick ideal destinations',
+        'An expert in analyzing tickets and suggesting products from Mercadona supermarket',
         tools=[ search_internet ],
         llm=llm,
         verbose=True)

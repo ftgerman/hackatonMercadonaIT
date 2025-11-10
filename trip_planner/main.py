@@ -17,6 +17,25 @@ class TripCrew:
     def run(self):
         agents = TripAgents()
         tasks = TripTasks()
+        recommender_agent = agents.agenteRecomendador()
+        recommend_task = tasks.recommend_task(
+            recommender_agent,
+            self.origin,
+            self.cities,
+            self.interests,
+            self.date_range
+        )
+        crew = Crew(
+            agents=[recommender_agent],
+            tasks=[recommend_task],
+            verbose=True
+        )
+
+        return crew.kickoff()
+
+    def run2(self):
+        agents = TripAgents()
+        tasks = TripTasks()
 
         city_selector_agent = agents.city_selection_agent()
         local_expert_agent = agents.local_expert()
