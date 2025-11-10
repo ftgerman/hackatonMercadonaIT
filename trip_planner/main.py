@@ -45,7 +45,7 @@ class TripCrew:
 
 # Interfaz Streamlit
 st.set_page_config(page_title="MercaBot", layout="centered")
-st.title("MercaBot")
+st.title("MercaBot 🛒🤖")
 st.markdown("Introduzca categoría y consulta.")
 
 with st.form("mb_form"):
@@ -59,7 +59,7 @@ with st.form("mb_form"):
     consulta = st.text_input("Consulta")
     btn_enviar = st.form_submit_button("Generar respuesta")
 
-if btn_enviar and categoria!="Seleccione categoría..." and consulta!="":
+if btn_enviar and ((categoria!="Seleccione categoría..." and consulta!="") or (categoria=="Recomendador")):
     if categoria == "Queja":
         telefono ="+34 637601888" 
         datos = {

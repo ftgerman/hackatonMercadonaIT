@@ -66,27 +66,3 @@ class TripAgents():
         verbose=True
         )
 
-  def cocinero(self):
-    return Agent(
-        role='Expert Cook',
-        goal='Provide the ingredients given a certain recipe',
-        backstory="""A very reknown cook""",
-        tools=[
-            readFileReceta
-        ],
-        llm=llm,
-        verbose=True)
-    
-
-  def travel_concierge(self):
-    return Agent(
-        role='Amazing Travel Concierge',
-        goal="""Create the most amazing travel itineraries with budget and 
-        packing suggestions for the city""",
-        backstory="""Specialist in travel planning and logistics with 
-        decades of experience""",
-        tools=[
-            search_internet,
-            browse, calc  ],
-        llm=llm,
-        verbose=True)

@@ -10,17 +10,16 @@ class TripTasks:
         return Task(   
             
             description=dedent(f"""
-                Eres un analista de datos experto de Mercadona.Donde dads una lista de
-            feedbacks negativos:          
-                {datos}
+                You are an expert data analyst from Mercadona. You will be given a list of
+                        negative feedbacks: 
+                        {datos}
 
-                Debes resumir los feedbacks y otorgar datos numéricos que aporten valor, como los porcentajes de cada categoría de queja.
-                Solo debes aportar datos numéricos y que sea breve.
-
-
+                        You must summarize the feedbacks and provide valuable numerical data,
+                        such as the percentages for each complaint category.
+                        You must only provide numerical data and keep it brief.
             """),
             agent=agent,
-            expected_output="Lista de categoría de queja y su porcentaje"
+            expected_output="Bulleted list of generic complaint categories with percentages."
         )
 
 
@@ -54,8 +53,7 @@ class TripTasks:
 
                 It is imperative that your recommendations are **specific products available at Mercadona**. Avoid generic suggestions like 'buy more fruits' or 'try new snacks'. Instead, name actual products they can find in the store.                                
                 **The final result must be entirely in Spanish.**
-                               
-                {self.__tip_section()}
+                            
 
                 The output is a list of 3 recommended products with justifications based on the tickets provided. 
                 Talk to the client in a friendly and professional manner. Explain him, in a brief way, why you have chosen those products.  
@@ -98,7 +96,3 @@ class TripTasks:
         
         )
 
-
-
-    def __tip_section(self):
-        return "If you do your BEST WORK, I'll tip you $100!"
