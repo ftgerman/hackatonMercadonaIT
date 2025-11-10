@@ -4,7 +4,7 @@ from crewai import Agent, LLM
 from tools.browser_tools import BrowserTools
 from tools.calculator_tools import CalculatorTools
 from tools.search_tools import SearchTools
-from crewai_tools import FileReadTool
+from crewai_tools import FileReadTool, FileWriterTool
 
 
 import json
@@ -29,7 +29,8 @@ llm = LLM(
 search_internet = SearchTools.search_internet
 browse = BrowserTools.scrape_and_summarize_website
 calc = CalculatorTools.calculate
-readFile = FileReadTool()
+writeFileReceta = FileWriterTool()
+readFileReceta = FileReadTool("./receta.txt")
 
 class TripAgents():
 
@@ -50,7 +51,8 @@ class TripAgents():
         backstory="""An expert in the research capable of locating every single type of recipe""",
         tools=[
             search_internet,
-            browse    ],
+            browse,
+            writeFileReceta    ],
         llm=llm,
         verbose=True
         )
@@ -61,7 +63,7 @@ class TripAgents():
         goal='Provide the ingredients given a certain recipe',
         backstory="""A very reknown cook""",
         tools=[
-            readFile
+            readFileReceta
         ],
         llm=llm,
         verbose=True)

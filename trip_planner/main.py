@@ -32,9 +32,9 @@ class TripCrew:
                 cocinero = agents.cocinero()
                 buscador = agents.buscador()
                 buscadorecetas = tasks.buscadorecetas(
-                    cocinero, consulta
+                    buscador, consulta
                 )
-                sacaingredientes = tasks.sacaingredientes(buscador)
+                sacaingredientes = tasks.sacaingredientes(cocinero)
                 crew = Crew(
                 agents = [cocinero, buscador],
                 tasks = [buscadorecetas, sacaingredientes],

@@ -53,6 +53,7 @@ class TripTasks:
                 From a recipe input: {comida}
                 You will have to look through the internet in order to find 
                 the recipe given by the input.
+                You must output the recipe in a simple txt file named "receta.txt" in your directory once done.
             """),
             agent=agent,
             expected_output="The recipe given by the input: {comida}",
@@ -64,11 +65,11 @@ class TripTasks:
         return Task(
             
             description=dedent(f"""
-                From the recipe: 
+                From the recipe store in the file "receta.txt":
                 You will have to extract the ingredients from the recipe.
             """),
             agent=agent,
-            expected_output="The list of ingredients that are used in the recipe: "
+            expected_output="The list of ingredients that are used in the recipe and the amounts"
         
         )
 
