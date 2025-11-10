@@ -29,15 +29,13 @@ class TripCrew:
                 )
                 return crew.kickoff()
             case "Recetas":
-                cocinero = agents.cocinero()
                 buscador = agents.buscador()
                 buscadorecetas = tasks.buscadorecetas(
-                    cocinero, consulta
+                    buscador, consulta
                 )
-                sacaingredientes = tasks.sacaingredientes(buscador)
                 crew = Crew(
-                agents = [cocinero, buscador],
-                tasks = [buscadorecetas, sacaingredientes],
+                agents = [buscador],
+                tasks = [buscadorecetas],
                 verbose = True
                 )
                 return crew.kickoff()

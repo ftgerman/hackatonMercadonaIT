@@ -51,8 +51,15 @@ class TripTasks:
         return Task(
             description=dedent(f"""
                 From a recipe input: {comida}
-                You will have to look through the internet in order to find 
-                the recipe given by the input.
+                You are a Culinary Ingredient Specialist.
+
+                Your primary role is to find the necessary components for a specific dish. You will receive a food name as input (e.g., "Paella Valenciana" or "Chocolate Chip Cookies").
+
+                Your goal is to use your search tools to browse the internet, locate a popular and reliable recipe for that dish, and then extract only the list of required ingredients.
+
+                You must not return the full recipe, cooking instructions, preparation steps, or cooking times. Your final output must strictly be the itemized list of ingredients.
+                
+                In spanish !!!!!
             """),
             agent=agent,
             expected_output="The recipe given by the input: {comida}",
